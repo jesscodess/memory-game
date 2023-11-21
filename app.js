@@ -1,113 +1,125 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-});
-//card options
-const cardArray = [
-    {
+    
+    //list all card options
+    
+    const cardArray = [
+      {
         name: 'fox-blush',
         img: 'images/fox-blush.png'
-    },
-    {
-        name: 'fox-blush',
-        img: 'images/fox-blush.png'
-    },
-    {
-        name: 'foxBread',
-        img: 'images/fox-bread.png'
-    },
-    {
+      },
+      {
         name: 'fox-bread',
         img: 'images/fox-bread.png'
-    },
-    {
+      },
+      {
         name: 'fox-coffee',
         img: 'images/fox-coffee.png'
-    },
-    {
+      },
+      {
+        name: 'fox-happy',
+        img: 'images/fox-happy.png'
+      },
+      {
+        name: 'fox-laptop',
+        img: 'images/fox-laptop.png'
+      },
+      {
+        name: 'fox-snug',
+        img: 'images/fox-snug.png'
+      },
+      {
+        name: 'fox-blush',
+        img: 'images/fox-blush.png'
+      },
+      {
+        name: 'fox-bread',
+        img: 'images/fox-bread.png'
+      },
+      {
         name: 'fox-coffee',
         img: 'images/fox-coffee.png'
-    },
-    {
+      },
+      {
         name: 'fox-happy',
         img: 'images/fox-happy.png'
-    },
-    {
-        name: 'fox-happy',
-        img: 'images/fox-happy.png'
-    },
-    {
+      },
+      {
         name: 'fox-laptop',
         img: 'images/fox-laptop.png'
-    },
-    {
-        name: 'fox-laptop',
-        img: 'images/fox-laptop.png'
-    },
-    {
+      },
+      {
         name: 'fox-snug',
         img: 'images/fox-snug.png'
-    },
-    {
-        name: 'fox-snug',
-        img: 'images/fox-snug.png'
-    }
-];
+      }
+    ];
+  
+    //sorting the cards randomly
 
-cardArray.sort(() => 0.5 - Math.random());
+    cardArray.sort(() => 0.5 - Math.random());
+  
+    //creating variables
 
-const grid = document.querySelector('.grid');
-const resultDisplay = document.querySelector('#result');
-var cardsChosen = [];
-var cardsChosenId = [];
-var cardsWon = [];
+    const grid = document.querySelector('.grid');
+    const resultDisplay = document.querySelector('#result');
+    let cardsChosen = [];
+    let cardsChosenId = [];
+    let cardsWon = [];
 
-//create the board
+    //FUNCTIONS
+  
+    //creating the board
 
-function createBoard(){
-    for (let i = 0; i < cardArray.length; i++){
-        var card = document.createElement('img');
+    function createBoard() {
+      for (let i = 0; i < cardArray.length; i++) {
+        const card = document.createElement('img');
         card.setAttribute('src', 'images/blank.png');
         card.setAttribute('data-id', i);
         card.addEventListener('click', flipCard);
         grid.appendChild(card);
-    }
-};
+      }
+    };
+  
+    //checking for matches
 
-//check for matches
-
-function checkForMatch(){
-    var cards = document.querySelectorAll('img');
-    const optionOneId = cardsChosenId[0];
-    const optionTwoId = cardsChosen[1];
-    if (cardsChosen[0] === cardsChosen[1]){
+    function checkForMatch() {
+      const cards = document.querySelectorAll('img');
+      const optionOneId = cardsChosenId[0];
+      const optionTwoId = cardsChosenId[1];
+      if(optionOneId == optionTwoId) {
+        cards[optionOneId].setAttribute('src', 'images/blank.png');
+        cards[optionTwoId].setAttribute('src', 'images/blank.png');
+        alert('You have clicked the same image!');
+      }else if (cardsChosen[0] === cardsChosen[1]){
         alert('You found a match!');
         cards[optionOneId].setAttribute('src', 'images/square.png');
         cards[optionTwoId].setAttribute('src', 'images/square.png');
-        cardsWon.push(cards);
-    }else{
+        cards[optionOneId].removeEventListener('click', flipCard);
+        cards[optionTwoId].removeEventListener('click', flipCard);
+        cardsWon.push(cardsChosen);
+      } else {
         cards[optionOneId].setAttribute('src', 'images/blank.png');
         cards[optionTwoId].setAttribute('src', 'images/blank.png');
         alert('Sorry, try again!');
-    }
-    cardsChosen = [];
-    cardsChosenId = [];
-    resultDisplay.textContent = cardsWon.length;
-    if (cardsWon.length === cardArray.length/2){
+      }
+      cardsChosen = [];
+      cardsChosenId = [];
+      resultDisplay.textContent = cardsWon.length;
+      if(cardsWon.length === cardArray.length/2){
         resultDisplay.textContent = 'Congratulations! You found them all!';
+      }
     }
-};
+  
+    //flipping the card
 
-//flip the cards
-
-function flipCard (){
-    var cardID = this.getAttribute('data-id');
-    cardsChosen.push(cardArray[cardId].name);
-    cardsChosenId.push(cardId);
-    this.setAttribute('src', cardArray[cardId].img);
-    if (cardsChosen.length === 2){
-        setTimeout(checkForMatch,500);
-    }
-};
-
-
-createBoard();
+    function flipCard() {
+      let cardId = this.getAttribute('data-id');
+      cardsChosen.push(cardArray[cardId].name);
+      cardsChosenId.push(cardId);
+      this.setAttribute('src', cardArray[cardId].img);
+      if (cardsChosen.length === 2) {
+        setTimeout(checkForMatch, 500);
+      }
+    };
+  
+    createBoard();
+  });
