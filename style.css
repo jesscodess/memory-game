@@ -1,11 +1,19 @@
 body{
-  background-color:wheat;
+  background-color:purple;
+  font-family: 'Courier New', monospace;
+}
+
+h3{
+  text-align:center;
+  color: floralwhite;
 }
 
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  padding-left:30%;
   width: 400px;
   height: 300px;
 }
+
+/*darkmagenta; darkorchid; indigo;*/

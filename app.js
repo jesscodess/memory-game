@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cards[optionTwoId].setAttribute('src', 'images/blank.png');
         alert('You have clicked the same image!');
       }else if (cardsChosen[0] === cardsChosen[1]){
-        alert('You found a match!');
         cards[optionOneId].setAttribute('src', 'images/square.png');
         cards[optionTwoId].setAttribute('src', 'images/square.png');
         cards[optionOneId].removeEventListener('click', flipCard);
@@ -99,13 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         cards[optionOneId].setAttribute('src', 'images/blank.png');
         cards[optionTwoId].setAttribute('src', 'images/blank.png');
-        alert('Sorry, try again!');
+        setTimeout(10000);
       }
       cardsChosen = [];
       cardsChosenId = [];
       resultDisplay.textContent = cardsWon.length;
       if(cardsWon.length === cardArray.length/2){
-        resultDisplay.textContent = 'Congratulations! You found them all!';
+        resultDisplay.textContent = ' Congratulations! You found them all! 🎉';
       }
     }
   
