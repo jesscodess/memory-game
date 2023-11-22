@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         cards[optionOneId].setAttribute('src', 'images/blank.png');
         cards[optionTwoId].setAttribute('src', 'images/blank.png');
-        setTimeout(10000);
+        setTimeout(20000);
       }
       cardsChosen = [];
       cardsChosenId = [];
